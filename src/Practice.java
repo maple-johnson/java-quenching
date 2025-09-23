@@ -10,8 +10,23 @@ public class Practice {
      * @param nums an array of numbers
      * @return the sum of the odd numbers in the array
      */
-    public static int oddSum(int[] nums) {
-        return 0;
+    public static int oddSum(int[] nums) 
+    {
+        // Set up sum variable
+        int odds = 0;
+
+        // Null handling
+        if (nums == null) return odds;
+
+        // Loop through each item in the array
+        for (int i = 0; i < nums.length; i++) 
+        {
+            // If odd, add amount to the variable
+            if (nums[i] % 2 != 0) odds += nums[i];
+        }
+
+        // Return the sum of the odds in the array
+        return odds;
     }
 
     /**
