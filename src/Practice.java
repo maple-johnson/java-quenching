@@ -40,8 +40,43 @@ public class Practice {
      * @throws IllegalArgumentException if words is empty
      * @throws NullPointerException if words is null
      */
-    public static String shortestWord(Set<String> words) {
-        return null;
+    public static String shortestWord(Set<String> words) 
+    {
+        // Error handling
+        if (words.isEmpty()) throw new IllegalArgumentException();
+        if (words == null) throw new NullPointerException();
+
+        // Set up shortest word variable
+        String shortWord = "";
+
+        // Go through each word in the set
+        for (String word : words) 
+        {
+            // If empty, initialize first word into variable
+            if (shortWord.equals("")) shortWord = word;
+            // If shorter, change variable to current word
+            else if (word.length() < shortWord.length()) shortWord = word;
+            // If same length, compare individual letters lexicographically
+            else if (word.length() == shortWord.length())
+            {
+                // Cycle through each letter in the word
+                for (int i = 0; i < word.length(); i++)
+                {
+                    // If larger, keep old word and stop checking
+                    if (word.charAt(i) > shortWord.charAt(i)) break;
+                    // If smaller, replace with new word and stop checking
+                    if (word.charAt(i) < shortWord.charAt(i))
+                    {
+                        shortWord = word;
+                        break;
+                    }
+                    // Otherwise, keep checking
+                }
+            }
+        }
+
+        // Return shortest word
+        return shortWord;
     }
 
     /**
