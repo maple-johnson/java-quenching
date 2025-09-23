@@ -1,7 +1,9 @@
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class Practice {
+public class Practice 
+{
     /**
      * Returns the sum of the odd numbers in the array.
      * 
@@ -27,6 +29,7 @@ public class Practice {
 
         // Return the sum of the odds in the array
         return odds;
+
     }
 
     /**
@@ -77,6 +80,7 @@ public class Practice {
 
         // Return shortest word
         return shortWord;
+
     }
 
     /**
@@ -88,8 +92,23 @@ public class Practice {
      * @return the set of all names of people >= 18 years old
      * @throws NullPointerException if ages is null
      */
-    public static Set<String> adults(Map<String, Integer> ages) {
-        return null;
+    public static Set<String> adults(Map<String, Integer> ages) 
+    {
+        // Set up a variable to hold a set of names
+        Set<String> adultList = new HashSet<String>();
+        
+        // For each name in the map
+        for (String name : ages.keySet())
+        {
+            // If the age is null throw an exception
+            if (ages.get(name) == null) throw new NullPointerException();
+            // Otherwise, if 18 or over, add name to the adultList
+            else if (ages.get(name) >= 18) adultList.add(name);
+        }
+
+        // Return the set
+        return adultList;
+
     }
 
     /**
