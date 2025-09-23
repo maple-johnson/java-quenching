@@ -118,8 +118,28 @@ public class Practice
      * @return the biggest number in the list
      * @throws IllegalArgumentException if head is null
      */
-    public static int biggestNumber(ListNode<Integer> head) {
-        return 0;
+    public static int biggestNumber(ListNode<Integer> head) 
+    {
+        // Throw exception, if head is null
+        if (head == null) throw new IllegalArgumentException();
+
+        // Set up a new node that can cycle through the list
+        ListNode<Integer> current = head;
+        // Initialize the biggest number variable with the current number
+        int bigNum = current.data;
+        
+        // Cycle through
+        while (current.next != null)
+        {
+            // Set new node spot
+            current = current.next;
+            // If the current number is bigger than the value in bigNum, use the current number
+            if (current.data > bigNum) bigNum = current.data;
+        }
+
+        // Return the biggest number
+        return bigNum;
+
     }
 
     /**
