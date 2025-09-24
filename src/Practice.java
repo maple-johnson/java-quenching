@@ -209,7 +209,7 @@ public class Practice
         // Compare left and right directions, and return the largest level
         if (levelLeft > levelRight) return levelLeft;
         else return levelRight;
-        
+
     }
 
 
@@ -236,8 +236,33 @@ public class Practice
      * @param level the level to sum
      * @return the sum of the nodes at the given level
      */
-    public static int sumAtLevel(BinaryTreeNode<Integer> root, int level) {
-        return 0;
+    public static int sumAtLevel(BinaryTreeNode<Integer> root, int level) 
+    {
+        // Call helper method and return result
+        return sumAtLevel(root, level, 0);
+    }
+
+    public static int sumAtLevel(BinaryTreeNode<Integer> root, int level, int sum)
+    {
+        // If null increment the level back up and return the sum
+        if (root == null)
+        {
+            level++;
+            return sum;
+        }
+
+        // Decrement the level
+        level--;
+        // When the level is zero, add the data to the sum
+        if (level == 0) sum += root.data;
+
+        // Traverse left, then right
+        int sumLeft = sumAtLevel(root.left, level, sum);
+        int sumRight = sumAtLevel(root.right, level, sumLeft);
+
+        // Return the overall sum
+        return sumRight;
+
     }
 
 
