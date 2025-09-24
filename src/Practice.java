@@ -276,9 +276,58 @@ public class Practice
      * @param head The head of the linked list
      * @return true if the sums are equal, false otherwise
      */
-    public static boolean sumMatch(BinaryTreeNode<Integer> root, ListNode<Integer> head) {
-        return false;
+    public static boolean sumMatch(BinaryTreeNode<Integer> root, ListNode<Integer> head) 
+    {
+        // Call a method to calculate and return the sum of the ListNode
+        int listTotal = listSum(head);
+        // Call a method to calculate and return the sum of the tree
+        int treeTotal = treeSum(root, 0);
+        // Compare the totals, if matching return true, else return false
+        if (listTotal == treeTotal) return true;
+        else return false;
     }
+
+    public static int listSum(ListNode<Integer> head)
+    {
+        // Set up the variable to hold the sum within the list
+        int listTotal = 0;
+        // If null return current total
+        if (head == null) return listTotal;
+        // Set up a node to cycle through the list
+        ListNode<Integer> current = head;
+        // Add the current data to the total
+        listTotal += current.data;
+        
+        // Cycle through the Listnode
+        while (current.next != null)
+        {
+            // Go to next node
+            current = current.next;
+            // Add the current data to the total
+            listTotal += current.data;
+        }
+
+        // Return the overall total
+        return listTotal;
+
+    }
+
+    public static int treeSum(BinaryTreeNode<Integer> root, int total)
+    {
+        // If null, return total
+        if (root == null) return total;
+        // Add the current data to the total
+        total += root.data;
+
+        // Cycle through the tree left, then right
+        int leftTotal = treeSum(root.left, total);
+        int rightTotal = treeSum(root.right, leftTotal);
+
+        // Return the overall total
+        return rightTotal;
+
+    }
+
 
     /**
      * Returns the sum of all the vertices in a graph that are reachable from a given
