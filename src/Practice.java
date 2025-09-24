@@ -338,9 +338,39 @@ public class Practice
      * @param start the starting vertex
      * @return the sum of all the vertices
      */
-    public static int graphSum(Vertex<Integer> start) {
-        return 0;
+    public static int graphSum(Vertex<Integer> start) 
+    {
+        // Set up a Set to keep track of all locations visited
+        Set<Vertex<Integer>> visited = new HashSet<>();
+        // Call a helper method and return the sum
+        return graphSum(start, visited);
     }
+
+    public static int graphSum(Vertex<Integer> start, Set<Vertex<Integer>> visited)
+    {
+        // If null or already visited, return a 0
+        if (start == null || visited.contains(start)) return 0;
+        // Add location to the visited list
+        visited.add(start);
+        // Set up a variable to hold the sum
+        int sum = 0;
+        // Add the initial data to the summ
+        sum += start.data;
+
+        // Cycle through all the neighboring points
+        for (Vertex<Integer> neighbor : start.neighbors)
+        {
+            // Recursively check each neighbor and return the sum
+            int neighborSum = graphSum(neighbor, visited);
+            // Add the neighbors sum to the total sum
+            sum += neighborSum;
+        }
+
+        // Return the total sum
+        return sum;
+
+    }
+    
 
     /**
      * Returns the count of vertices in a graph that have an outdegree of 0.
