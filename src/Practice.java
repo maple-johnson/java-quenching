@@ -175,7 +175,7 @@ public class Practice
         {
             // Go to next node
             current = current.next;
-            
+
             //If the key doesn't exist, add key with a count of 1
             if (!freqMap.containsKey(current.data)) freqMap.put(current.data, 1);
             // If key already exists, increment the value of said key
@@ -196,8 +196,20 @@ public class Practice
      * @param root the root of the tree
      * @return the number of levels in the tree
      */
-    public static int levelCount(BinaryTreeNode<?> root) {
-        return 0;
+    public static int levelCount(BinaryTreeNode<?> root) 
+    {
+        // If null return 0
+        if (root == null) return 0;
+
+        // Check left, incrementing each level
+        int levelLeft = levelCount(root.left) + 1;
+        // Check right, incrementing each level
+        int levelRight = levelCount(root.right) + 1;
+
+        // Compare left and right directions, and return the largest level
+        if (levelLeft > levelRight) return levelLeft;
+        else return levelRight;
+        
     }
 
 
