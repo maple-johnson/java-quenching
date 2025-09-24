@@ -370,7 +370,7 @@ public class Practice
         return sum;
 
     }
-    
+
 
     /**
      * Returns the count of vertices in a graph that have an outdegree of 0.
@@ -380,7 +380,35 @@ public class Practice
      * @param start the entrypoint to the graph
      * @return the count of vertices with outdegree 0
      */
-    public static int sinkCount(Vertex<Integer> start) {
-        return 0;
+    public static int sinkCount(Vertex<Integer> start) 
+    {
+        // Initialize set to keep track of what's been visited
+        Set<Vertex<Integer>> visited = new HashSet<>();
+        // Call a helper method to count dead ends, and return the count
+        return sinkCount(start, visited, 0);
+
     }
+
+    public static int sinkCount(Vertex<Integer> start, Set<Vertex<Integer>> visited, int count)
+    {
+        // If null or already visited, return count
+        if (start == null || visited.contains(start)) return count;
+        // Add the current vertex to visited
+        visited.add(start);
+
+        // If there are no neighbors, increment the count
+        if (start.neighbors.isEmpty()) count++;
+
+        // Cycle through each neighbor
+        for (Vertex<Integer> neighbor : start.neighbors)
+        {
+            // Recursively check for additional neighbor dead ends
+            count = sinkCount(neighbor, visited, count);
+        }
+
+        // Return the total count
+        return count;
+
+    }    
+
 }
